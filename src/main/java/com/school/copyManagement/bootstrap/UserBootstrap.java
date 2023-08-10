@@ -1,5 +1,6 @@
 package com.school.copyManagement.bootstrap;
 
+import com.school.copyManagement.constant.Status;
 import com.school.copyManagement.model.Role;
 import com.school.copyManagement.model.User;
 import com.school.copyManagement.service.RoleService;
@@ -39,6 +40,7 @@ public class UserBootstrap {
             userAdmin.setUserName("admin@gmail.com");
             userAdmin.setPassword(passwordEncoder.encode("123456"));
             userAdmin.setPhoneNumber("0210987654321");
+            userAdmin.setStatus(Status.ACTIVATED);
 
             userAdmin.getRoles().add(admin);
 
@@ -53,6 +55,7 @@ public class UserBootstrap {
             userTeatcher.setUserName("teatcher@gmail.com");
             userTeatcher.setPassword(passwordEncoder.encode("123456"));
             userTeatcher.setPhoneNumber("1210987654321");
+            userTeatcher.setStatus(Status.ACTIVATED);
 
             userTeatcher.getRoles().add(teatcher);
 
@@ -67,6 +70,8 @@ public class UserBootstrap {
             userStudent.setUserName("student@gmail.com");
             userStudent.setPassword(passwordEncoder.encode("123456"));
             userStudent.setPhoneNumber("2210987654321");
+            userStudent.setStatus(Status.ACTIVATED);
+
 
             userStudent.getRoles().add(student);
 

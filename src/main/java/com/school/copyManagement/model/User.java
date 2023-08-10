@@ -1,6 +1,7 @@
 package com.school.copyManagement.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.school.copyManagement.constant.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,8 @@ public class User {
     private String password;
 
     private String phoneNumber;
+
+    private Status status;
 
     @ManyToMany(targetEntity = Role.class, cascade = CascadeType.MERGE)
     @JoinTable(
