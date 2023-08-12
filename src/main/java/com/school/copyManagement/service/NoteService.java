@@ -8,6 +8,7 @@ import com.school.copyManagement.model.User;
 import com.school.copyManagement.repository.CourseRepository;
 import com.school.copyManagement.repository.NoteRepository;
 import com.school.copyManagement.repository.UserRepository;
+import com.school.copyManagement.utils.Utils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -81,6 +82,40 @@ public class NoteService {
         try {
             // GETTING ALL NOTES
             List<Note> notes = this.noteRepository.findAll();
+            if(notes.isEmpty())
+            {
+                return null;
+            }
+            return ResponseHandler.generateOkResponse("Notes list", notes);
+        }
+        catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+            return ResponseHandler.generateError(e);
+        }
+    }
+    // DELETE NOTE
+    public ResponseEntity<Object> deleteNote(Long idNote) {
+        // GET COURSE
+        Optional<Note> note = noteRepository.findById(idNote);
+
+        try {
+            if (!note.isPresent()) {
+                return ResponseHandler.generateNotFoundResponse("Note not found !");
+            }
+
+
+            noteRepository.delete(note.get());
+            return ResponseHandler.generateOkResponse("Note properly deleted !",
+                    null);
+        } catch (Exception e) {
+            return Utils.catchException(e);
+        }
+    }
+
+    public ResponseEntity<Object> fintNoteByIdCourse(Long idCourse) {
+        try {
+            // GETTING ALL NOTES
+            List<Note> notes = this.noteRepository.fintNoteByIdCourse(idCourse);
             if(notes.isEmpty())
             {
                 return null;

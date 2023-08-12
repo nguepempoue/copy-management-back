@@ -1,6 +1,5 @@
 package com.school.copyManagement.controller;
 
-import com.school.copyManagement.dto.request.CourseRequest;
 import com.school.copyManagement.dto.request.NoteRequest;
 import com.school.copyManagement.service.NoteService;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +21,22 @@ public class NoteController {
         return noteService.createNote(noteRequest, idStudent, idCourse);
     }
 
-    // FIND ALL COURSES
+    // FIND ALL NOTE
     @GetMapping("/all")
-    public ResponseEntity<Object> findAllUser() {
+    public ResponseEntity<Object> findNote() {
         return noteService.findAll();
+    }
+
+
+    // FIND ALL NOTE BY ID COURSE
+    @GetMapping("/all-note-by/{idCourse}")
+    public ResponseEntity<Object> fintNoteByIdCourse( @PathVariable("idCourse") Long idCourse) {
+        return noteService.fintNoteByIdCourse(idCourse);
+    }
+
+    // DELETE
+    @DeleteMapping("/{idNote}")
+    public ResponseEntity<Object> deleteNote(@PathVariable("idNote") Long idNote) {
+        return noteService.deleteNote(idNote);
     }
 }

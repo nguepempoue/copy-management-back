@@ -3,10 +3,11 @@ package com.school.copyManagement.service;
 import com.school.copyManagement.dto.request.CourseRequest;
 import com.school.copyManagement.dto.response.ResponseHandler;
 import com.school.copyManagement.model.Course;
-import com.school.copyManagement.model.Role;
+import com.school.copyManagement.model.Note;
 import com.school.copyManagement.model.User;
 import com.school.copyManagement.repository.CourseRepository;
 import com.school.copyManagement.repository.UserRepository;
+import com.school.copyManagement.utils.Utils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -96,6 +97,41 @@ public class CourseService {
         catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
             return null;
+        }
+    }
+
+    // DELETE COURSE
+    public ResponseEntity<Object> deleteCourse(Long idCourse) {
+        // GET COURSE
+        Optional<Course> course = courseRepository.findById(idCourse);
+
+        try {
+            if (!course.isPresent()) {
+                return ResponseHandler.generateNotFoundResponse("Course not found !");
+            }
+
+
+            courseRepository.delete(course.get());
+            return ResponseHandler.generateOkResponse("Course properly deleted !",
+                    null);
+        } catch (Exception e) {
+            return Utils.catchException(e);
+        }
+    }
+
+    public ResponseEntity<Object> fintNoteByIdCourse(Long idUser) {
+        try {
+            // GETTING ALL COURSE
+            List<Course> courses = this.courseRepository.fintCourseByIdidTeatcher(idUser);
+            if(courses.isEmpty())
+            {
+                return null;
+            }
+            return ResponseHandler.generateOkResponse("Courses list", courses);
+        }
+        catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+            return ResponseHandler.generateError(e);
         }
     }
 }

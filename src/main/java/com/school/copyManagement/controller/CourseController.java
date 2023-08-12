@@ -32,4 +32,15 @@ public class CourseController {
     public ResponseEntity<Object> findCourseById(@RequestParam Long id) {
         return courseService.findCourseById(id);
     }
+
+    // DELETE
+    @DeleteMapping("/{idCourse}")
+    public ResponseEntity<Object> deleteCourse(@PathVariable("idCourse") Long idCourse) {
+        return courseService.deleteCourse(idCourse);
+    }
+    // FIND ALL COURSES BY ID TEATCHER
+    @GetMapping("/all-courses-by/{idCourse}")
+    public ResponseEntity<Object> fintNoteByIdCourse( @PathVariable("idCourse") Long idCourse) {
+        return courseService.fintNoteByIdCourse(idCourse);
+    }
 }
