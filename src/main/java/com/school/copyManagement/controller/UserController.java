@@ -57,4 +57,6 @@ public class UserController {
     public void changeUserStatus(@RequestParam Long idUser, @RequestParam Status status) {
          userService.changeUserStatus(idUser, status);
     }
+
+
 }
